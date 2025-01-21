@@ -1,0 +1,352 @@
+/*general*/
+@font-face {
+  font-family: "Optima-Medium";
+  src: url("../fonts/OptimaMedium.eot"); 
+  src: url("../fonts/OptimaMedium.eot?#iefix") format("embedded-opentype"), 
+    url("../fonts/OptimaMedium.otf") format("opentype"), 
+    url("../fonts/OptimaMedium.svg") format("svg"), 
+    url("../fonts/OptimaMedium.ttf") format("truetype"),
+    url("../fonts/OptimaMedium.woff") format("woff"), 
+    url("../fonts/OptimaMedium.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+    padding: 30px 50px;
+	background-color: black;
+	color: #DAD5CB;
+    font-size:16px;
+    font-family: 'Optima-Medium';
+    line-height: 1.5em;
+    text-align:center;
+    cursor: none; 
+	overflow-x: hidden;
+}
+
+a {
+	text-decoration: none;
+	color:#DAD5CB;
+	font-family: 'Optima-Medium';
+	cursor: none;
+}
+
+p a {
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	text-decoration-thickness: 2px;
+	text-decoration-style: dotted;
+}
+
+/*header*/
+header{
+	margin:30px 0px 30px 0px;
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 9999; 
+}
+
+header .nav{
+	margin:0px 0px 0px 80px;
+	justify-content: space-between;
+	align-items: right;
+	position: relative;
+  	text-decoration: none;
+}
+
+header .nav::after {
+	content: '';
+	position: absolute;
+	bottom: -8px; 
+	left: 0;
+	width: 0;
+	height: 3px; 
+	background-color: currentColor; 
+	transition: width 0.5s ease; 
+}
+
+header .nav:hover::after {
+  	width: 100%; 
+}
+
+header a {
+	font-size:18px;
+	text-align: left;
+}
+
+h1 {
+	margin:0px;
+	font-size:30px;
+	text-transform: uppercase;
+}
+
+.menu-icon {
+    display: none;
+}
+
+.overlay-menu {
+    display: none;
+}
+
+/*footer*/
+footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer a {
+    transition: all 0.5s ease;
+    font-size: 20px;
+    color: #DAD5CB; 
+}
+
+.footer-icon {
+    fill: #DAD5CB; 
+    width: 30px; 
+    height: 30px;
+}
+
+/*cursor*/
+.cursor {
+  pointer-events: none;
+  z-index: 10000;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.cursor__ball {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  transform-origin: center;
+  mix-blend-mode: difference;
+  z-index: 10001;
+}
+
+.cursor__ball circle {
+  fill: #E33013;
+}
+
+/*index page*/
+.viewport {
+    display: flex; 
+    flex-direction: column; 
+    height: calc(100vh - 80px); 
+}
+
+.intro{
+	flex-grow: 1; 
+    display: flex; 
+    align-items: center; 
+    text-align: left; 
+	transform: translateY(-10%);
+}
+
+.intro h1{
+	font-size: 50px;
+	line-height: 1.3em;
+	text-transform: none;
+}
+
+/* Typewriter effect */
+.typewriter {
+	text-transform: none;
+	display: inline;
+}
+  
+.typewriter-cursor {
+	display: inline-block;
+	font-weight: bold;
+	animation: blink 0.7s step-end infinite;
+}
+  
+/* Blinking cursor animation */
+@keyframes blink {
+	50% {
+		opacity: 0;
+	}
+}
+
+#arrow-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none; 
+    z-index: 9998; 
+    opacity: 0; 
+    transition: opacity 1.5s ease;
+}
+
+.arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    border: none;
+    cursor: none;
+    opacity: 1;
+}
+
+.arrow svg {
+    width: 50px;
+    height: 50px;
+    fill: #DAD5CB;
+}
+
+/*pd/gd/ux pages*/
+header {grid-area: header;}
+.home1 {grid-area: home1;}
+.home2 {grid-area: home2;}
+.home3 {grid-area: home3;}
+.home4 {grid-area: home4;}
+.home5 {grid-area: home5;}
+.home6 {grid-area: home6;}
+footer {grid-area: footer;}
+
+.home-wrapper {
+	display:grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-auto-rows: minmax(10px, auto);
+	grid-column-gap:30px;
+	grid-row-gap: 30px;
+	grid-template-areas: 
+	'header header'
+	'home1  home2'
+	'home3  home4'
+	'home5  home6'
+	'footer footer';
+}
+
+.gallery {
+    display: inline-block;
+    position: relative;
+    width: 100%; 
+    overflow: hidden;
+    aspect-ratio: 3 / 2; 
+}
+
+.gallery img,
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    transition: all 0.5s ease;
+    background-color: #DAD5CB;
+    color: black;
+    opacity: 0;
+    text-align: left;
+    z-index: 1; 
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.gallery:hover .overlay {
+    opacity: 1;
+}
+
+h2 {
+    font-size: 50px;
+    line-height: 1.3em;
+    color: black;
+	margin: 20px 0px 0px 0px;
+}
+
+h3 {
+    font-size: 18px;
+    color: black;
+	margin: 10px 0px 0px 0px;
+}
+
+
+/*projects pages*/
+header {grid-area: header;}
+.project-nav {grid-area: project-nav;}
+.project1 {grid-area: project1;}
+.project2 {grid-area: project2;}
+.project3 {grid-area: project3;}
+footer {grid-area: footer;}
+
+.project-wrapper {
+	display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-auto-rows: minmax(10px, auto);
+    gap: 30px;
+    grid-template-areas: 
+        'header      header'
+        'project-nav project-nav'
+        'project1    project2'
+        'project3    project3'
+        'footer      footer';
+}
+
+.project-nav{
+	display:flex;
+	justify-content:space-between;
+}
+
+h4{
+	font-size:18px;
+	margin:0px;
+}
+
+.project-nav h4 a{
+	transition: all .5s ease;
+}
+
+.project1, .project2{
+	margin:100px 0px 50px 0px;
+}
+
+.project-wrapper h2{
+	font-size: 50px;
+	text-align:left;
+	margin:0px 0px 0px 0px;
+	color:#DAD5CB;
+}
+
+.project-wrapper h3{
+	font-size:20px;
+	text-align:left;
+	margin:20px 0px 0px 0px;
+	color:#DAD5CB;
+}
+
+.project-wrapper p{
+	text-align:left;
+	margin:0 0 30px 0;
+}
+
+.full img{
+	width: 100%;
+	margin-bottom:2%;
+}
+
+.half{
+	display:flex;
+	justify-content:space-between;
+}
+
+.half img{
+	max-width:49%;
+	height:auto;
+	margin-bottom:2%;
+}

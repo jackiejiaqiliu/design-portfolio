@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Final Project - Jiaqi Liu</title>
+		<meta name="description" content="This is a website for Jiaqi Liu's design portfolio.">
+		<meta name="keywords" content="design,portfolio,resume,nyu,web design">
+		<meta name="author" content="Jiaqi Liu">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+		<link rel="stylesheet" media="only screen and (max-width: 865px)" href="styles/mobile.css">	
+		<link rel="stylesheet" media="only screen and (min-width: 866px) and (max-width: 1199px)" href="styles/tablet.css">
+		<link rel="stylesheet" media="only screen and (min-width: 1200px)" href="styles/desktop.css">
+	</head>
+	
+	<body>
+		<div class="cursor">
+		  <div class="cursor__ball">
+		    <svg height="40" width="40">
+		      <circle cx="20" cy="20" r="18" stroke-width="0"></circle>
+		    </svg>
+		  </div>
+		</div>
+		
+		<div class="viewport">
+			<header>
+				<a href="index.html"><h1>Jiaqi Liu Design</h1></a>
+				<div>
+					<a href="pd.html" class="nav">Production Design</a>
+					<a href="gd.html" class="nav">Graphic Design</a>
+					<a href="ux.html" class="nav">UX/UI Design</a>
+					<a href="docs/Professional-CV.pdf" target="_blank" class="nav">CV</a>
+				</div>
+				<svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+					<path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/>
+				</svg>
+			</header>
+			
+			<div class="overlay-menu">
+				<svg class="close-button" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+					<path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/>
+				</svg>
+				<div class="overlay-nav">
+					<a href="pd.html">Production Design</a>
+					<a href="gd.html">Graphic Design</a>
+					<a href="ux.html">UX/UI Design</a>
+					<a href="docs/Professional-CV.pdf" target="_blank">CV</a>
+				</div>
+			</div>
+
+			<div class="intro">
+				<h1>
+					Jiaqi Liu is a NYC & Chicago-based <br>
+					<span class="typewriter"></span><span class="typewriter-cursor">|</span>
+				</h1>
+			</div>			
+			
+			<div id="arrow-container">
+				<a href="#" id="dynamic-arrow" class="arrow" target="_self">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z" fill="#DAD5CB"/>
+					</svg>
+				</a>
+			</div>
+		</div>	
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+		<script src="scripts.js"></script>
+	</body>
+</html>
