@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       { text: "production designer for indie films", link: "pd.html", target: "_self" },
       { text: "graphic designer for arts and cultures", link: "gd.html", target: "_self" },
       { text: "UX/UI designer for startups and research labs", link: "ux.html", target: "_self" },
+      { text: "photographer for events and people", link: "https://drive.google.com/file/d/1-hBxq0ABxUDRAuJxHOcifXYpuPHL2gQs/view?usp=sharing", target: "_blank" },
       { text: "artist for well... her own pleasure", link: "https://www.jiaqiliu.com/", target: "_blank" }
   ];
   const typewriterElement = document.querySelector(".typewriter");
