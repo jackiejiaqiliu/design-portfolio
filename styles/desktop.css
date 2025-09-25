@@ -214,6 +214,8 @@ header {grid-area: header;}
 .home4 {grid-area: home4;}
 .home5 {grid-area: home5;}
 .home6 {grid-area: home6;}
+.home7 {grid-area: home7;}
+.home8 {grid-area: home8;}
 footer {grid-area: footer;}
 
 .home-wrapper {
@@ -227,6 +229,7 @@ footer {grid-area: footer;}
 	'home1  home2'
 	'home3  home4'
 	'home5  home6'
+    'home7  home8'
 	'footer footer';
 }
 
