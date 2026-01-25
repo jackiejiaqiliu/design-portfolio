@@ -1,0 +1,103 @@
+@import "desktop.css";
+
+body {
+    padding: 20px 50px; 
+	font-size: 15px;
+}
+
+header .nav {
+    margin: 0px 0px 0px 40px; 
+    font-size: 16px; 
+}
+
+.overlay {
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 28px; 
+    margin: 10px 0px 0px 0px;
+}
+
+h3 {
+    font-size: 14px; 
+	margin-top: 30px;
+    margin-left: 30px;
+	margin: 10px 0px 0px 0px;
+}
+
+h4{
+	font-size:16px;
+	margin:0px;
+}
+
+.viewport {
+    display: flex; 
+    flex-direction: column; 
+    height: calc(100vh - 60px); 
+}
+
+.intro {
+    flex-grow: 1; 
+    display: flex; 
+    align-items: center;
+    text-align: left; 
+    transform: translateY(-20%);
+}
+
+.intro h1 {
+    font-size: 44px; 
+}
+
+.home-wrapper {
+	min-height: calc(100vh - 80px); 
+}
+
+.project-wrapper {
+    grid-column-gap: 20px; 
+    grid-row-gap: 20px;
+	display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 80px); 
+    justify-content: space-between; 
+    box-sizing: border-box;  
+}
+
+.project1, .project2 {
+    margin: 40px 0px 0px 0px; 
+}
+
+.project-wrapper h2 {
+    font-size: 40px; 
+}
+
+.project-wrapper h3 {
+    font-size: 18px; 
+    margin-top: 10px;
+}
+
+.gallery {
+    margin-bottom: 15px; 
+}
+
+.home-wrapper {
+    grid-row-gap: 20px;
+}
+
+footer{
+	margin-top: auto;
+}
+
+footer a{
+	font-size: 16px;
+}
+
+.footer-icon {
+    width: 24px; 
+    height: 24px;
+}
