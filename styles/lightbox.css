@@ -1,0 +1,104 @@
+.lightbox-open {
+  overflow: hidden;
+}
+
+.lightbox-trigger {
+  cursor: zoom-in;
+}
+
+.lightbox-trigger:focus-visible {
+  outline: 2px solid #dad5cb;
+  outline-offset: 5px;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 110px 114px 80px;
+  border: 0;
+  background: rgba(0, 0, 0, 0.96);
+  color: #dad5cb;
+  cursor: auto;
+}
+
+.lightbox::backdrop {
+  background: #000;
+}
+
+.lightbox[open] {
+  display: grid;
+  place-items: center;
+}
+
+.lightbox-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+}
+
+.lightbox-image {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100dvh - 224px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+}
+
+.lightbox-caption {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.lightbox button {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: 30px/1 sans-serif;
+  cursor: pointer;
+}
+
+.lightbox button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.lightbox button svg { width: 24px; height: 24px; fill: currentColor; }
+.lightbox-prev svg { transform: rotate(180deg); }
+
+.lightbox-close { top: 38px; right: 58px; }
+.lightbox-prev { left: 58px; top: calc(50% - 24px); }
+.lightbox-next { right: 58px; top: calc(50% - 24px); }
+
+@media (min-width: 866px) and (max-width: 1199px) {
+  .lightbox-close { top: 28px; }
+}
+
+@media (max-width: 865px) {
+  .lightbox { padding: 112px 28px 100px; }
+  .lightbox-close { top: 48px; right: 28px; }
+  .lightbox-prev { top: auto; bottom: 28px; left: 28px; }
+  .lightbox-next { top: auto; bottom: 28px; right: 28px; }
+  .lightbox-image { max-height: calc(100dvh - 246px); }
+  .lightbox-caption { font-size: 12px; }
+}

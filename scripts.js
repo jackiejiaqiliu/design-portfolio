@@ -52,87 +52,49 @@ cursor.style.display = 'none';
 document.addEventListener('DOMContentLoaded', restoreCursorPosition);
 
 // Index Page Typewriter Effect
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
+  const title = document.querySelector('.typewriter');
+  if (!title) return;
   const roles = [
-      { text: "production designer for indie films", link: "pd.html", target: "_self" },
-      { text: "graphic designer for arts and cultures", link: "gd.html", target: "_self" },
-      { text: "UX/UI designer for startups and research labs", link: "ux.html", target: "_self" },
-      { text: "photographer for events and people", link: "https://drive.google.com/file/d/1-hBxq0ABxUDRAuJxHOcifXYpuPHL2gQs/view?usp=sharing", target: "_blank" },
-      { text: "artist for well... her own pleasure", link: "https://www.jiaqiliu.com/", target: "_blank" }
+    { text: 'production designer', link: 'pd/' },
+    { text: 'graphic designer', link: 'gd/' },
+    { text: 'UX/UI designer', link: 'ux/' }
   ];
-  const typewriterElement = document.querySelector(".typewriter");
-  const arrowContainer = document.getElementById("arrow-container");
-  const dynamicArrow = document.getElementById("dynamic-arrow");
-
+  const stateKey = 'typewriterTitlesState';
   let roleIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
-  let isReturning = false;
-
-  const navigationType = performance.getEntriesByType("navigation")[0].type;
-  if (navigationType === "reload") {
-      localStorage.removeItem("typewriterState");
-  } else {
-      const savedState = JSON.parse(localStorage.getItem("typewriterState"));
-      if (savedState) {
-          roleIndex = savedState.roleIndex || 0;
-          charIndex = savedState.charIndex || 0;
-          isDeleting = savedState.isDeleting || false;
-
-          if (charIndex === roles[roleIndex].text.length && !isDeleting) {
-              isReturning = true;
-              dynamicArrow.href = roles[roleIndex].link;
-              dynamicArrow.target = roles[roleIndex].target;
-              arrowContainer.style.display = "flex";
-              arrowContainer.style.opacity = "1";
-          }
-      }
-  }
-
-  function saveState() {
-      const state = {
-          roleIndex,
-          charIndex,
-          isDeleting
-      };
-      localStorage.setItem("typewriterState", JSON.stringify(state));
-  }
+  try {
+    const saved = JSON.parse(localStorage.getItem(stateKey));
+    if (saved && performance.getEntriesByType('navigation')[0]?.type !== 'reload') {
+      roleIndex = Number.isInteger(saved.roleIndex) ? ((saved.roleIndex % roles.length) + roles.length) % roles.length : 0;
+      charIndex = Math.max(0, Math.min(Number(saved.charIndex) || 0, roles[roleIndex].text.length));
+      isDeleting = Boolean(saved.isDeleting);
+    }
+  } catch { /* Start fresh if saved animation state is unavailable. */ }
 
   function type() {
-      const currentRole = roles[roleIndex];
-
-      if (!isDeleting) {
-          typewriterElement.textContent = currentRole.text.substring(0, charIndex + 1);
-          charIndex++;
-          if (charIndex === currentRole.text.length) {
-              isDeleting = true;
-
-              if (!isReturning) {
-                  dynamicArrow.href = currentRole.link;
-                  dynamicArrow.target = currentRole.target;
-                  arrowContainer.style.display = "flex";
-                  setTimeout(() => (arrowContainer.style.opacity = "1"), 50);
-              }
-              isReturning = false;
-
-              setTimeout(() => {
-                  arrowContainer.style.opacity = "0";
-                  setTimeout(() => (arrowContainer.style.display = "none"), 1500);
-                  type();
-              }, 5000);
-              return;
-          }
-      } else {
-          typewriterElement.textContent = currentRole.text.substring(0, charIndex - 1);
-          charIndex--;
-          if (charIndex === 0) {
-              isDeleting = false;
-              roleIndex = (roleIndex + 1) % roles.length;
-          }
-      }
-      saveState();
-      setTimeout(type, isDeleting ? 50 : 100);
+    const role = roles[roleIndex];
+    title.href = role.link;
+    title.setAttribute('aria-label', role.text);
+    charIndex += isDeleting ? -1 : 1;
+    charIndex = Math.max(0, Math.min(charIndex, role.text.length));
+    title.textContent = role.text.slice(0, charIndex);
+    let delay = isDeleting ? 50 : 100;
+    if (!isDeleting && charIndex === role.text.length) {
+      isDeleting = true;
+      delay = 1500;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      roleIndex = (roleIndex + 1) % roles.length;
+      delay = 150;
+    }
+    try {
+      localStorage.setItem(stateKey, JSON.stringify({ roleIndex, charIndex, isDeleting }));
+    } catch { /* The animation also works when storage is disabled. */ }
+    setTimeout(type, delay);
   }
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   type();
 });
 
