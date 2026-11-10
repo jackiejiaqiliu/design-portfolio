@@ -25,15 +25,21 @@ def main():
     works = json.loads((folder / 'student-works.json').read_text())
     failures = []
     for work in works:
+        if f'data-preview="{work["id"]}"' not in page.read_text() or not re.search(
+            r'<iframe\b[^>]*data-preview="' + re.escape(work['id']) + r'"', page.read_text()
+        ):
+            print('Skipping existing local preview:', work['title'], flush=True)
+            continue
         try:
             with tempfile.TemporaryDirectory(prefix='student-work-firefox-') as tmp:
                 profile = Path(tmp) / 'profile'
                 profile.mkdir()
                 (profile / 'user.js').write_text('user_pref("ui.prefersReducedMotion", 1);\n')
                 screenshot = Path(tmp) / 'screenshot.png'
+                capture_url = (folder / work['capture_path']).as_uri() if work.get('capture_path') else work['url']
                 result = subprocess.run([
                     args.firefox, '--headless', '--no-remote', '--profile', str(profile),
-                    '--window-size', '1440,960', '--screenshot', str(screenshot), work['url']
+                    '--window-size', '1440,960', '--screenshot', str(screenshot), capture_url
                 ], capture_output=True, text=True, timeout=60)
                 if result.returncode != 0 or not screenshot.is_file():
                     raise RuntimeError(result.stderr.strip()[:250] or 'Firefox did not produce a screenshot')

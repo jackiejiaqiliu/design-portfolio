@@ -49,16 +49,26 @@ python3 -m http.server 5501 --bind 127.0.0.1
 
 Open http://127.0.0.1:5501/.
 
-## Firefox student-work screenshots
+## Firefox student-work videos
 
-The Web 1 and Web 2 pages currently use live previews where a screenshot has not yet been captured. To replace those with optimized JPGs, run:
+Web 1 and Web 2 use local images for static homepages and silent, looping MP4 previews for animated homepages, instead of embedding student websites. Each video keeps the opening viewport fixed; Sense additionally demonstrates the original site's mouse and title interaction. External card links still open the original projects.
+
+Videos are stored in each course's `videos/` folder, with matching static posters in `images/`. Only visible previews load and play; reduced-motion visitors see the poster instead.
+
+To re-record, use Firefox, Node.js 22 or later, and ffmpeg. Start an isolated Firefox profile from a normal terminal:
 
 ```sh
-python3 tools/capture-student-work.py --course web-interactive-design-1
-python3 tools/capture-student-work.py --course web-interactive-design-2
+mkdir -p /tmp/portfolio-firefox-video
+"/Applications/Firefox.app/Contents/MacOS/firefox" --headless --no-remote --profile /tmp/portfolio-firefox-video --remote-debugging-port 9228 about:blank
 ```
 
-Requires Firefox and Pillow. Each course's `student-works.json` supplies the source URLs and credits. The script uses a temporary Firefox profile.
+From a second terminal at the repository root:
+
+```sh
+node tools/record-student-previews.mjs
+```
+
+Optional filters: `--course web-interactive-design-1`, `--id andy-nguyen-sense`, or `--seconds 8`. Each course's `student-works.json` supplies titles, credits, URLs, and any extra loading delay.
 
 ## Course detail URLs
 

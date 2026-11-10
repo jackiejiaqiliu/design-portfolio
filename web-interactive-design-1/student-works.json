@@ -9,12 +9,14 @@
     "id": "maritza-loezza",
     "title": "PetGuard",
     "student": "Maritza Loezza",
-    "url": "https://web1-student-work-maritza-loezza.netlify.app/"
+    "url": "https://web1-student-work-maritza-loezza.netlify.app/",
+    "preview_type": "image"
   },
   {
     "id": "carmen-lira",
     "title": "Blueberries",
     "student": "Carmen Lira",
-    "url": "https://web1-student-work-carmen-lira-2.netlify.app/"
+    "url": "https://web1-student-work-carmen-lira-2.netlify.app/",
+    "preview_type": "image"
   }
 ]

@@ -8,21 +8,23 @@
   },
   {
     "id": "andy-nguyen-portfolio",
-    "title": "Portfolio",
+    "title": "Design Portfolio",
     "student": "Andy Nguyen",
     "slug": "web-2-student-work-andy-nguyen-3",
-    "url": "https://web-2-student-work-andy-nguyen-3.netlify.app/"
+    "url": "https://web-2-student-work-andy-nguyen-3.netlify.app/",
+    "warmup_ms": 6000
   },
   {
     "id": "andy-nguyen-sense",
-    "title": "sense",
+    "title": "Sense",
     "student": "Andy Nguyen",
     "slug": "web2-student-work-andy-nguyen",
-    "url": "https://web2-student-work-andy-nguyen.netlify.app/"
+    "url": "https://web2-student-work-andy-nguyen.netlify.app/",
+    "preview_seconds": 12
   },
   {
     "id": "maritza-loezza-portfolio",
-    "title": "Portfolio",
+    "title": "Design Portfolio",
     "student": "Maritza Loezza",
     "slug": "web2-student-work-maritza-loezza-2",
     "url": "https://web2-student-work-maritza-loezza-2.netlify.app/"
@@ -32,28 +34,32 @@
     "title": "Aqualume",
     "student": "Maritza Loezza",
     "slug": "web2-student-work-maritza-loezza",
-    "url": "https://web2-student-work-maritza-loezza.netlify.app/"
+    "url": "https://web2-student-work-maritza-loezza.netlify.app/",
+    "preview_type": "image"
   },
   {
     "id": "kelly-chuang",
-    "title": "Portfolio",
+    "title": "Design Portfolio",
     "student": "Kelly Chuang",
     "slug": "web2-student-work-kelly-chuang-2",
-    "url": "https://web2-student-work-kelly-chuang-2.netlify.app/"
+    "url": "https://web2-student-work-kelly-chuang-2.netlify.app/",
+    "preview_type": "image"
   },
   {
     "id": "angelina-gonzalez",
     "title": "ITZA",
     "student": "Angelina Gonzalez",
     "slug": "web2-student-work-angelina-gonzalez",
-    "url": "https://web2-student-work-angelina-gonzalez.netlify.app/"
+    "url": "https://web2-student-work-angelina-gonzalez.netlify.app/",
+    "preview_type": "image"
   },
   {
     "id": "saleta-perez",
-    "title": "Portfolio",
+    "title": "Design Portfolio",
     "student": "Saleta Perez",
     "slug": "web2-student-work-saleta-perez-3",
-    "url": "https://web2-student-work-saleta-perez-3.netlify.app/"
+    "url": "https://web2-student-work-saleta-perez-3.netlify.app/",
+    "preview_type": "image"
   },
   {
     "id": "nagisa-yoshikawa",
