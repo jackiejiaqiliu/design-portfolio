@@ -1,0 +1,88 @@
+.project-wrapper .student-work-section > h2 {
+  margin: 0 0 28px;
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: normal;
+}
+
+.student-work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 30px;
+}
+
+.student-work-card {
+  display: block;
+  min-width: 0;
+  color: inherit;
+  text-align: left;
+}
+
+.student-work-preview {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: #141414;
+}
+
+.student-work-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Temporary live previews until Firefox screenshots are captured. */
+.student-work-preview iframe {
+  display: block;
+  width: 250%;
+  height: 250%;
+  border: 0;
+  transform: scale(0.4);
+  transform-origin: top left;
+  pointer-events: none;
+}
+
+.student-work-credit { padding-top: 16px; }
+
+.project-wrapper .student-work-credit h3 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.project-wrapper .student-work-credit p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.student-work-card:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 6px;
+}
+
+@media (min-width: 866px) and (max-width: 1199px) {
+  .student-work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 865px) {
+  .student-work-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .project-wrapper .student-work-section > h2 { font-size: 18px; margin-bottom: 20px; }
+  .project-wrapper .student-work-credit h3 { font-size: 18px; }
+  .project-wrapper .student-work-credit p { font-size: 12px; }
+}
+
+/* Preserve the full source image while thumbnails are being edited. */
+.uncropped-previews .student-work-preview {
+  aspect-ratio: 16 / 9;
+}
+
+.uncropped-previews .student-work-preview img {
+  object-fit: contain;
+}
+
+.full-image-previews .student-work-preview img {
+  object-fit: contain;
+}
