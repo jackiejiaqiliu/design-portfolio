@@ -318,7 +318,44 @@ h4{
 	margin:0 0 30px 0;
 }
 
-.full img{
+/* Live website links on web project detail pages. */
+.project2 .live-site-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 12px 24px;
+    background-color: transparent;
+    color: #DAD5CB;
+    border: 1px solid #DAD5CB;
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 1.25;
+    text-decoration: none;
+    transition: background-color 180ms ease, color 180ms ease;
+}
+
+@media (hover: hover) {
+    .project2 .live-site-button:hover {
+        background-color: #DAD5CB;
+        color: #000;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .project2 .live-site-button {
+        transition: none;
+    }
+}
+
+.project2 .live-site-button:focus-visible {
+    outline: 2px solid #DAD5CB;
+    outline-offset: 4px;
+}
+
+.full img,
+.full video{
 	width: 100%;
 	height: auto;
 	margin-bottom:2%;

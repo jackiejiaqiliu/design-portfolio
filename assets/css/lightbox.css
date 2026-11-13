@@ -95,6 +95,21 @@
 }
 
 @media (max-width: 865px) {
+  .lightbox button {
+    appearance: none;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .lightbox button,
+  .lightbox button:hover,
+  .lightbox button:focus,
+  .lightbox button:focus-visible,
+  .lightbox button:active {
+    border: 0;
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+  }
   .lightbox { padding: 112px 28px 100px; }
   .lightbox-close { top: 48px; right: 28px; }
   .lightbox-prev { top: auto; bottom: 28px; left: 28px; }

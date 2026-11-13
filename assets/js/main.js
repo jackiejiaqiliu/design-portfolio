@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const roles = [
     { text: 'production designer', link: 'pd/' },
     { text: 'graphic designer', link: 'gd/' },
-    { text: 'UX/UI designer', link: 'ux/' }
+    { text: 'Web & Interactive Designer', link: 'ux/' }
   ];
   const stateKey = 'typewriterTitlesState';
   let roleIndex = 0;
