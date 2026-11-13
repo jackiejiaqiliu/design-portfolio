@@ -78,7 +78,17 @@ async function record(bidi, context, course, work) {
     await bidi.call('browsingContext.navigate', { context, url: work.url, wait: 'complete' });
     await bidi.call('input.performActions', { context, actions: [{ type: 'pointer', id: 'preview-mouse', parameters: { pointerType: 'mouse' }, actions: [{ type: 'pointerMove', x: 0, y: 0, duration: 0 }] }] });
     await evaluate(`Promise.race([document.fonts.ready.then(() => true), new Promise(r => setTimeout(() => r(false), 5000))])`);
+    await evaluate(`Promise.race([Promise.all(Array.from(document.images).filter(i => i.getBoundingClientRect().top < innerHeight).map(i => i.decode().catch(() => {}))), new Promise(r => setTimeout(r, 10000))]).then(() => true)`);
     await sleep(Number(work.warmup_ms || 2200));
+    if (['angelina-gonzalez', 'saleta-perez', 'nagisa-yoshikawa'].includes(work.id)) {
+      // Firefox collapses percentage-sized SVG logos in auto-sized link wrappers.
+      // Give only the original header logo an explicit recording width.
+      await evaluate(`(() => { const logo = document.querySelector('header img[src*="logo"]');
+        if (logo) { logo.style.width = '${work.id === 'saleta-perez' ? 120 : 150}px'; logo.style.height = 'auto'; logo.style.maxWidth = 'none'; }
+        return true; })()`);
+      await sleep(600);
+    }
+
     // Accept the warning only inside the recording browser; the linked original keeps it.
     if (work.id === 'andy-nguyen-sense') {
       await evaluate(`(() => { document.querySelector('#enter-site-btn')?.click(); return true; })()`);
@@ -148,7 +158,8 @@ async function record(bidi, context, course, work) {
     const existing = new RegExp(String.raw`<video\b[^>]*data-preview="${safeID}"[^>]*>[\s\S]*?</video>`);
     const escape = value => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
     const video = `<video class="student-work-video" data-preview="${work.id}" poster="images/${work.id}-poster.jpg" muted loop playsinline preload="none" aria-label="${escape(work.title)} by ${escape(work.student)}"><source data-src="videos/${work.id}.mp4" type="video/mp4"></video>`;
-    const matcher = iframe.test(html) ? iframe : existing;
+    const existingImage = new RegExp(String.raw`<img\b[^>]*data-preview="${safeID}"[^>]*>`);
+    const matcher = iframe.test(html) ? iframe : existing.test(html) ? existing : existingImage;
     if (!matcher.test(html)) throw new Error(`Could not find preview card ${work.id}; video was saved but page was not changed.`);
     await fs.writeFile(page, html.replace(matcher, () => video));
     console.log(`Recorded ${work.id}: ${(await fs.stat(path.join(videos, `${work.id}.mp4`))).size} bytes`);
