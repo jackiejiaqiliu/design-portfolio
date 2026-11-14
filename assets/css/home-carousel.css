@@ -4,6 +4,7 @@ html:has(.carousel-home) {
   scroll-behavior: smooth;
   overflow-x: clip;
   scroll-padding-top: 0;
+  scroll-snap-type: y mandatory;
   scrollbar-width: none;
 }
 .carousel-home {
@@ -24,7 +25,9 @@ html:has(.carousel-home) {
   place-items: center;
   width: 100%;
   height: 100svh;
-  min-height: 560px;
+  min-height: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   perspective: 1000px;
   overflow: clip;
   touch-action: pan-y pinch-zoom;
@@ -94,7 +97,7 @@ html:has(.carousel-home) {
 }
 .carousel-title a:focus-visible { outline: 1px solid #dad5cb; outline-offset: 8px; }
 @media (max-width: 865px) {
-  .carousel-scene { --card-width: 210px; min-height: 520px; perspective: 850px; }
+  .carousel-scene { --card-width: 210px; min-height: 0; perspective: 850px; }
   .carousel-title { max-width: calc(100% - 56px); font-size: 30px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -153,7 +156,7 @@ html:has(.carousel-home)::-webkit-scrollbar,
   .carousel-scene {
     --card-width: clamp(300px, 38vw, 400px);
     height: 100svh;
-    min-height: 600px;
+    min-height: 0;
   }
   .carousel-title {
     max-width: calc(100% - 2 * var(--page-gutter, 40px));

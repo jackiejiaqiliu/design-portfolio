@@ -31,6 +31,19 @@
   flex: 0 0 var(--site-header-reserve);
   pointer-events: none;
 }
+/* Desktop content and fixed header share a narrower outer guide. */
+@media (min-width: 1200px) {
+  :root {
+    --page-gutter: 40px;
+    --site-header-side: var(--page-gutter);
+    --site-header-top: 40px;
+    --site-header-reserve: 92px;
+  }
+  body:not(.carousel-home) {
+    margin-inline: 0;
+    padding: 22px var(--page-gutter);
+  }
+}
 @media (max-width: 1199px) and (min-width: 866px) {
   :root { --site-header-side: 40px; --site-header-reserve: 89px; }
   .site-header { gap: 18px; }
