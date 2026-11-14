@@ -139,18 +139,19 @@
   body h3, body h4 { font-size: 13px; }
   body .category-intro { padding-top: 20px; }
   body .category-intro h2 { font-size: 24px; }
-  body .category-intro p, body .card-caption p { font-size: 12px; }
-  body .project-wrapper > .project2 p { font-size: 11px; }
+  body .category-intro p { font-size: 12.5px; }
+  body .card-caption p { font-size: 12px; }
+  body .project-wrapper > .project2 p { font-size: 11.5px; }
   body .project-wrapper > .project2 > p:not(:last-child) { margin-bottom: 12px; }
   body .project-wrapper .copy-paragraph-break { display: block; height: 12px; }
   body .project-wrapper .copy-paragraph-break > br { display: none; }
   body .card-caption h2 { font-size: 18px; }
-  body .project-wrapper { justify-content: flex-start; }
+  body .project-wrapper { justify-content: flex-start; min-height: calc(100svh - 68px); }
   body .project-wrapper > .project1 { margin-top: 64px; margin-bottom: 0; }
   body .project-wrapper > .project2 { margin-top: 8px; }
   body .project-wrapper > .project2 > p:has(+ p > .live-site-button) { margin-bottom: 12px; }
   body .project-wrapper > .project3 { margin-bottom: 0; }
-  body .project-wrapper > .project-nav { margin-top: 26px; }
+  body .project-wrapper > .project-nav { margin-top: auto; padding-top: 26px; }
   body .project-wrapper > footer { margin-top: 16px; }
   body .project-wrapper h2 { font-size: 24px; }
   body .project-wrapper h3 { font-size: 13px; }
@@ -158,10 +159,10 @@
   body .project-back-link { font-size: 13px; bottom: calc(100% + 12px); }
   body .project2 .live-site-button { font-size: 13px; min-height: 40px; padding: 10px 20px; }
   body .project-wrapper .student-work-section > h2,
-  body .project-wrapper .core-student-works > h2 { font-size: 12px; }
+  body .project-wrapper .core-student-works > h2 { font-size: 13px; }
   body .project-wrapper > .student-work-section,
   body .project-wrapper > .core-student-works { padding-top: 12px; }
-  body .project-wrapper .student-work-credit h3 { font-size: 15px; }
+  body .project-wrapper .student-work-credit h3 { font-size: 13px; }
   body .project-wrapper .student-work-credit p { font-size: 11px; }
   body .footer-copyright,
   body .lightbox-caption { font-size: 11.5px; }
