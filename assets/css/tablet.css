@@ -68,7 +68,11 @@ h4{
     box-sizing: border-box;
 }
 
-.project1, .project2 {
+.project1 {
+    margin: 56px 0px 0px 0px;
+}
+
+.project2 {
     margin: 40px 0px 0px 0px;
 }
 
@@ -100,4 +104,45 @@ footer a{
 .footer-icon {
     width: 24px;
     height: 24px;
+}
+
+/* Tablet content follows the same guide as the fixed header. */
+@media (min-width: 768px) and (max-width: 1199px) {
+    body:not(.carousel-home) {
+        margin-inline: 0;
+        padding-inline: var(--page-gutter, 40px);
+    }
+    .category-page .category-intro { max-width: none; }
+    .project-wrapper > .project1 { margin-bottom: 0; }
+    .project-wrapper > .project2 { margin-top: 16px; }
+    .project-wrapper > .project2 > p:has(+ p > .live-site-button) { margin-bottom: 14px; }
+    .home-wrapper > *,
+    .project-wrapper > * { min-width: 0; }
+    body .overlay-menu { padding-inline: var(--page-gutter, 40px); }
+    .overlay-nav { width: 100%; }
+    .overlay-menu .overlay-nav a { margin-inline: 0; }
+    .overlay-menu .close-button {
+        right: var(--page-gutter, 40px);
+        top: var(--site-header-top);
+    }
+}
+
+/* Selected student work section labels on tablet. */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .project-wrapper > .project3.student-work-section > h2,
+    .project-wrapper > .project3.core-student-works > h2 { font-size: 16px; }
+}
+
+/* Use the same content-to-navigation and navigation-to-footer rhythm on tablet. */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .project-wrapper {
+        --tablet-stack-gap: 20px;
+    }
+    .project-wrapper:has(> .project-nav) { justify-content: flex-start; }
+    .project-wrapper > .project3 { margin-bottom: 0; }
+    .project-wrapper > .project-nav { margin-top: calc(30px - var(--tablet-stack-gap)); }
+    .project-wrapper > footer { margin-top: calc(30px - var(--tablet-stack-gap)); }
+}
+@media (min-width: 768px) and (max-width: 865px) {
+    .project-wrapper { --tablet-stack-gap: 4px; }
 }

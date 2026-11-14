@@ -1,0 +1,170 @@
+/* Shared fixed header: match the homepage at every breakpoint. */
+:root {
+  --site-header-top: 52px;
+  --site-header-side: 58px;
+  --site-header-reserve: 96px;
+}
+.site-header {
+  position: fixed;
+  inset: var(--site-header-top) var(--site-header-side) auto;
+  margin: 0;
+  gap: 24px;
+  z-index: 30;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--site-header-top)) calc(-1 * var(--site-header-side)) -45px;
+  background: linear-gradient(#000 12%, rgba(0, 0, 0, .82) 48%, transparent);
+  pointer-events: none;
+  z-index: -1;
+}
+.site-header .primary-nav { gap: clamp(18px, 2.1vw, 32px); }
+.site-header .primary-nav .nav { font-size: clamp(14px, 1.25vw, 18px); }
+/* Keep the original header's layout space so the content stays clear of it. */
+.home-wrapper::before,
+.project-wrapper::before {
+  content: '';
+  display: block;
+  grid-area: header;
+  height: var(--site-header-reserve);
+  flex: 0 0 var(--site-header-reserve);
+  pointer-events: none;
+}
+@media (max-width: 1199px) and (min-width: 866px) {
+  :root { --site-header-side: 40px; --site-header-reserve: 89px; }
+  .site-header { gap: 18px; }
+  .site-header h1 { font-size: clamp(20px, 2.1vw, 24px); }
+  .site-header .primary-nav { gap: 12px; }
+  .site-header .primary-nav .nav { font-size: clamp(12px, 1.37vw, 14px); }
+}
+@media (max-width: 865px) {
+  :root {
+    --site-header-top: max(36px, env(safe-area-inset-top));
+    --site-header-side: 28px;
+    --site-header-reserve: 54px;
+  }
+  .site-header h1 { font-size: 20px; }
+  .site-header .menu-icon { position: static; flex-shrink: 0; }
+}
+
+/* A single, quiet roll on hover; no resting decoration. */
+.site-header .primary-nav .nav {
+  display: inline-block;
+}
+.site-header .primary-nav .nav::before,
+.site-header .primary-nav .nav::after { content: none; }
+.nav-roll {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  line-height: 1.5;
+}
+.nav-roll-text,
+.nav-roll-copy {
+  display: block;
+  transition: transform 650ms cubic-bezier(.22, 1, .36, 1);
+}
+.nav-roll-copy {
+  position: absolute;
+  inset: 100% 0 auto;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .site-header .primary-nav .nav:hover .nav-roll-text,
+  .site-header .primary-nav .nav:hover .nav-roll-copy,
+  .live-site-button:hover .nav-roll-text,
+  .live-site-button:hover .nav-roll-copy {
+    transform: translateY(-100%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-roll-text, .nav-roll-copy { transition: none; }
+}
+
+.live-site-button .nav-roll { line-height: inherit; }
+
+
+/* One shared horizontal guide for iPad portrait and landscape layouts. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  :root {
+    --page-gutter: 40px;
+    --site-header-side: var(--page-gutter);
+  }
+}
+
+/* Touch layouts do not use the desktop custom cursor, including in dialogs. */
+@media (max-width: 1199px), (hover: none) and (pointer: coarse) {
+  .cursor, .cursor__ball { display: none !important; }
+  html body,
+  html body a,
+  html body button,
+  html body summary,
+  html body .menu-icon,
+  html body .close-button,
+  html body .lightbox,
+  html body .lightbox-trigger,
+  html body .carousel-scene,
+  html body .carousel-scene.is-dragging { cursor: auto; }
+}
+
+/* Compact phone guides and header; tablet and desktop remain unchanged. */
+@media (max-width: 767px) {
+  :root {
+    --page-gutter: 20px;
+    --site-header-side: var(--page-gutter);
+    --site-header-top: max(28px, env(safe-area-inset-top));
+    --site-header-reserve: 46px;
+  }
+  body:not(.carousel-home) {
+    margin-inline: 0;
+    padding: 32px var(--page-gutter) 20px;
+  }
+  .site-header h1 { font-size: 17px; line-height: 1.25; }
+  .site-header .menu-icon {
+    width: 20px;
+    height: 20px;
+    padding: 12px;
+    margin: -12px;
+    box-sizing: content-box;
+  }
+  body .overlay-menu { padding: var(--site-header-top) var(--page-gutter); }
+  .overlay-menu .overlay-nav { width: 100%; }
+  .overlay-menu .overlay-nav a { margin-inline: 0; }
+  .overlay-menu .close-button { right: var(--page-gutter); top: var(--site-header-top); }
+
+  /* Keep the established type hierarchy at a lighter phone scale. */
+  body { font-size: 11.5px; }
+  body h1 { font-size: 18px; }
+  body h2 { font-size: 24px; }
+  body h3, body h4 { font-size: 13px; }
+  body .category-intro { padding-top: 20px; }
+  body .category-intro h2 { font-size: 24px; }
+  body .category-intro p, body .card-caption p { font-size: 12px; }
+  body .project-wrapper > .project2 p { font-size: 11px; }
+  body .project-wrapper > .project2 > p:not(:last-child) { margin-bottom: 12px; }
+  body .project-wrapper .copy-paragraph-break { display: block; height: 12px; }
+  body .project-wrapper .copy-paragraph-break > br { display: none; }
+  body .card-caption h2 { font-size: 18px; }
+  body .project-wrapper { justify-content: flex-start; }
+  body .project-wrapper > .project1 { margin-top: 64px; margin-bottom: 0; }
+  body .project-wrapper > .project2 { margin-top: 8px; }
+  body .project-wrapper > .project2 > p:has(+ p > .live-site-button) { margin-bottom: 12px; }
+  body .project-wrapper > .project3 { margin-bottom: 0; }
+  body .project-wrapper > .project-nav { margin-top: 26px; }
+  body .project-wrapper > footer { margin-top: 16px; }
+  body .project-wrapper h2 { font-size: 24px; }
+  body .project-wrapper h3 { font-size: 13px; }
+  body .project-wrapper > .project1 > h3 { margin-top: 12px; }
+  body .project-back-link { font-size: 13px; bottom: calc(100% + 12px); }
+  body .project2 .live-site-button { font-size: 13px; min-height: 40px; padding: 10px 20px; }
+  body .project-wrapper .student-work-section > h2,
+  body .project-wrapper .core-student-works > h2 { font-size: 12px; }
+  body .project-wrapper > .student-work-section,
+  body .project-wrapper > .core-student-works { padding-top: 12px; }
+  body .project-wrapper .student-work-credit h3 { font-size: 15px; }
+  body .project-wrapper .student-work-credit p { font-size: 11px; }
+  body .footer-copyright,
+  body .lightbox-caption { font-size: 11.5px; }
+  body .overlay-menu a { font-size: 18px; }
+  body footer a { font-size: 13px; }
+}

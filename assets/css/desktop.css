@@ -296,7 +296,37 @@ h4{
 }
 
 .project1, .project2{
-	margin:100px 0px 50px 0px;
+	margin:56px 0px 50px 0px;
+}
+
+/* Match the visible cap-height tops of the 50px heading and 16px description. */
+@media (min-width: 1200px) {
+    .project-wrapper > .project2 { padding-top: 5px; }
+}
+
+/* Category return navigation, aligned with the project heading. */
+.project1 { position: relative; }
+.project-back-link {
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 32px);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #DAD5CB;
+    font-size: 16px;
+    line-height: 1.4;
+    white-space: nowrap;
+    text-decoration: none;
+}
+.project-back-chevron { display: block; flex: 0 0 auto; width: 12px; height: 12px; }
+.project-back-link:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 5px;
 }
 
 .project-wrapper h2{
@@ -333,26 +363,12 @@ h4{
     font-size: 16px;
     line-height: 1.25;
     text-decoration: none;
-    transition: background-color 180ms ease, color 180ms ease;
+    transition: border-color 180ms ease;
 }
-
-@media (hover: hover) {
-    .project2 .live-site-button:hover {
-        background-color: #DAD5CB;
-        color: #000;
-    }
-}
-
 @media (prefers-reduced-motion: reduce) {
-    .project2 .live-site-button {
-        transition: none;
-    }
+    .project2 .live-site-button { transition: none; }
 }
-
-.project2 .live-site-button:focus-visible {
-    outline: 2px solid #DAD5CB;
-    outline-offset: 4px;
-}
+.project2 .live-site-button:focus-visible { outline: 2px solid #DAD5CB; outline-offset: 4px; }
 
 .full img,
 .full video{
@@ -437,4 +453,22 @@ header .primary-nav .nav {
 
 .project-wrapper > .project-nav {
     margin-top: 64px;
+}
+
+/* Use the regular face of Optima for body copy. */
+@font-face {
+    font-family: 'Optima-Regular';
+    src: local('Optima-Regular'), local('Optima');
+    font-style: normal;
+    font-weight: 400;
+}
+.category-intro > p,
+.project-wrapper > .project2 p {
+    font-family: 'Optima-Regular', 'Optima-Medium', sans-serif;
+    font-weight: 400;
+}
+.category-intro > p a,
+.project-wrapper > .project2 p a:not(.live-site-button) {
+    font-family: inherit;
+    font-weight: inherit;
 }

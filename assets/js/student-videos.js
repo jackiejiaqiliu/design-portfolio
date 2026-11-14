@@ -24,6 +24,14 @@
     }
   }, { threshold: 0.15 });
   videos.forEach(video => observer.observe(video));
-  document.addEventListener('visibilitychange', () => videos.forEach(sync));
-  reducedMotion.addEventListener('change', () => videos.forEach(sync));
+  document.addEventListener('visibilitychange', onChange);
+  reducedMotion.addEventListener('change', onChange);
+  function onChange() { videos.forEach(sync); }
+  document.addEventListener('portfolio:leave-page', () => {
+    observer.disconnect();
+    visible.clear();
+    videos.forEach(video => video.pause());
+    reducedMotion.removeEventListener('change',onChange);
+    document.removeEventListener('visibilitychange',onChange);
+  }, {once:true});
 })();

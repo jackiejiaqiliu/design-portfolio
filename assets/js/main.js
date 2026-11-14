@@ -1,3 +1,5 @@
+(() => {
+  const ready = callback => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', callback, {once:true}) : callback();
 //Custom Cursor
 const cursor = document.querySelector('.cursor__ball');
 
@@ -38,21 +40,27 @@ document.body.addEventListener('mouseenter', (e) => {
   gsap.to(cursor, { opacity: 1, x: x - 20, y: y - 20, duration: 0.15 });
 });
 
-document.querySelectorAll("a").forEach((el) => {
-  el.addEventListener("mouseenter", () => {
-      gsap.to(cursor, { scale: 0.6, duration: 0.2 });
-  });
-  el.addEventListener("mouseleave", () => {
-      gsap.to(cursor, { scale: 1, duration: 0.2 });
-  });
-});
+// Delegate hover feedback so dynamically created lightbox controls and
+// gallery triggers use the same interaction as links throughout the site.
+const clickable = 'a[href],button,[role="button"],summary,input[type="submit"],input[type="button"],input[type="reset"],.menu-icon,.close-button';
+let cursorSmall = false;
+function updateCursorTarget(target) {
+  const control = target instanceof Element ? target.closest(clickable) : null;
+  const small = !!control && !control.matches(':disabled,[aria-disabled="true"]') && !control.closest('[inert]');
+  if (small === cursorSmall) return;
+  cursorSmall = small;
+  gsap.to(cursor, {scale:small ? .6 : 1,duration:.2,overwrite:'auto'});
+}
+document.body.addEventListener('pointerover', event => updateCursorTarget(event.target));
+document.body.addEventListener('pointerout', event => updateCursorTarget(event.relatedTarget));
+document.body.addEventListener('mousemove', event => updateCursorTarget(event.target));
 
 cursor.style.display = 'none';
 
-document.addEventListener('DOMContentLoaded', restoreCursorPosition);
+ready( restoreCursorPosition);
 
 // Index Page Typewriter Effect
-document.addEventListener('DOMContentLoaded', () => {
+ready( () => {
   const title = document.querySelector('.typewriter');
   if (!title) return;
   const roles = [
@@ -98,8 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
   type();
 });
 
+// The carousel homepage manages its own accessible mobile menu.
 //mobile menu
-document.addEventListener('DOMContentLoaded', () => {
+ready( () => {
+    if (document.body.classList.contains('carousel-home')) return;
     const menuIcon = document.querySelector('.menu-icon');
     const overlayMenu = document.querySelector('.overlay-menu');
     const closeButton = document.querySelector('.close-button');
@@ -113,3 +123,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+})();

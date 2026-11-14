@@ -1,0 +1,177 @@
+/* On-scroll carousel arrangement inspired by Codrops/3DCarousel (MIT).
+   License: ../licenses/codrops-3d-carousel.txt. Homepage styles only. */
+html:has(.carousel-home) {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  scroll-padding-top: 0;
+  scrollbar-width: none;
+}
+.carousel-home {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: clip;
+  background: #000;
+  color: #dad5cb;
+  cursor: auto;
+}
+.carousel-home a { cursor: pointer; }
+.home-carousels { position: relative; }
+.carousel-scene {
+  --card-width: clamp(300px, 29vw, 420px);
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100svh;
+  min-height: 560px;
+  perspective: 1000px;
+  overflow: clip;
+  touch-action: pan-y pinch-zoom;
+  cursor: grab;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.carousel-scene.is-dragging { cursor: grabbing; }
+.carousel-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.carousel-cell {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--card-width);
+  aspect-ratio: var(--cover-ratio);
+  margin: 0;
+  transform-style: preserve-3d;
+  user-select: none;
+  pointer-events: none;
+}
+.carousel-card { position: absolute; inset: 0; transform-style: preserve-3d; }
+.carousel-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: #000;
+}
+.carousel-face-back { transform: rotateY(180deg); }
+.carousel-face img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  filter: brightness(.45);
+}
+.carousel-title {
+  position: relative;
+  z-index: 10;
+  max-width: calc(100% - 80px);
+  margin: 0;
+  color: inherit;
+  font-size: clamp(32px, 3.3vw, 48px);
+  line-height: 1.25;
+  font-weight: normal;
+  text-align: center;
+  text-shadow: 0 2px 8px #000, 0 0 40px #000;
+  pointer-events: none;
+  will-change: transform;
+}
+.carousel-title a {
+  display: inline-block;
+  padding: 8px 0;
+  color: inherit;
+  text-decoration: none;
+  pointer-events: auto;
+}
+.carousel-title a:focus-visible { outline: 1px solid #dad5cb; outline-offset: 8px; }
+@media (max-width: 865px) {
+  .carousel-scene { --card-width: 210px; min-height: 520px; perspective: 850px; }
+  .carousel-title { max-width: calc(100% - 56px); font-size: 30px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:has(.carousel-home) { scroll-behavior: auto; }
+}
+.carousel-home.carousel-menu-open { overflow: hidden; }
+
+/* Homepage scroll position is represented by four accessible section anchors. */
+html:has(.carousel-home)::-webkit-scrollbar,
+.carousel-home::-webkit-scrollbar { width: 0; height: 0; display: none; }
+.home-section-nav {
+  position: fixed;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  z-index: 25;
+}
+.section-dot {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: #dad5cb;
+  -webkit-tap-highlight-color: transparent;
+}
+.section-dot::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: .45;
+  transition: opacity 200ms ease, background-color 200ms ease;
+}
+.section-dot[aria-current="location"]::before { background: currentColor; opacity: 1; }
+.section-dot:hover::before { opacity: 1; }
+.section-dot:focus-visible { outline: 1px solid #dad5cb; outline-offset: -3px; border-radius: 50%; }
+.carousel-menu-open .home-section-nav { visibility: hidden; pointer-events: none; }
+@media (max-width: 865px) {
+  .home-section-nav { right: 4px; }
+}
+@media (prefers-reduced-motion: reduce) { .section-dot::before { transition: none; } }
+
+/* Use the shared custom cursor on desktop, including draggable covers. */
+@media (min-width: 866px) and (hover: hover) and (pointer: fine) {
+  .carousel-home,
+  .carousel-home a,
+  .carousel-home .carousel-scene,
+  .carousel-home .carousel-scene.is-dragging { cursor: none; }
+}
+
+/* Tablet uses the selected 3D elliptical orbit. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .carousel-scene {
+    --card-width: clamp(300px, 38vw, 400px);
+    height: 100svh;
+    min-height: 600px;
+  }
+  .carousel-title {
+    max-width: calc(100% - 2 * var(--page-gutter, 40px));
+    font-size: clamp(32px, 4vw, 40px);
+  }
+  .home-section-nav { display: flex; right: 12px; }
+}
+
+/* The same 3D elliptical orbit, scaled for phone screens. */
+@media (max-width: 767px) {
+  .carousel-scene {
+    --card-width: clamp(200px, 55vw, 280px);
+    height: 100dvh;
+    min-height: 0;
+  }
+  .carousel-title {
+    max-width: calc(100% - 2 * var(--page-gutter, 20px));
+    font-size: clamp(22px, 6vw, 26px);
+  }
+  .home-section-nav { display: flex; right: 4px; }
+}

@@ -3,7 +3,7 @@
 }
 
 .lightbox-trigger {
-  cursor: zoom-in;
+  cursor: inherit;
 }
 
 .lightbox-trigger:focus-visible {
@@ -29,7 +29,7 @@
 }
 
 .lightbox::backdrop {
-  background: #000;
+  background: transparent;
 }
 
 .lightbox[open] {
@@ -116,4 +116,27 @@
   .lightbox-next { top: auto; bottom: 28px; right: 28px; }
   .lightbox-image { max-height: calc(100dvh - 246px); }
   .lightbox-caption { font-size: 12px; }
+}
+
+/* Keep the red cursor in the modal top layer as well as over gallery images. */
+@media (min-width: 866px) and (hover: hover) and (pointer: fine) {
+  .lightbox-trigger, .lightbox, .lightbox button { cursor: none; }
+}
+
+/* Match the visible icons to tablet content edges; retain generous hit areas. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .lightbox { padding-inline: calc(var(--page-gutter, 40px) + 56px); }
+  .lightbox-close { right: calc(var(--page-gutter, 40px) - 12px); }
+  .lightbox-prev { left: calc(var(--page-gutter, 40px) - 12px); }
+  .lightbox-next { right: calc(var(--page-gutter, 40px) - 12px); }
+}
+
+@media (max-width: 767px) {
+  .lightbox { padding-inline: calc(var(--page-gutter, 20px) + 40px); }
+  .lightbox-close {
+    top: calc(var(--site-header-top, 28px) - 12px);
+    right: calc(var(--page-gutter, 20px) - 12px);
+  }
+  .lightbox-prev { left: calc(var(--page-gutter, 20px) - 12px); top: calc(50% - 24px); bottom: auto; }
+  .lightbox-next { right: calc(var(--page-gutter, 20px) - 12px); top: calc(50% - 24px); bottom: auto; }
 }
